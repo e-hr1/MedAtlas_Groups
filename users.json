@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "a5f4725c-750b-482c-a35c-b75e7459a200",
+      "name": "محمد",
+      "avatar": "https://raw.githubusercontent.com/e-hr1/MedAtlas_Groups/main/uploads/images/85cda57d-62e2-40ac-b218-7d391d0da07a.jpg",
+      "updatedAt": "2026-11-20T15:07:56.647Z"
+    }
+  ]
 }
