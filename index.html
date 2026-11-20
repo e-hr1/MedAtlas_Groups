@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#172b46">
 <title>MedAtlas Groups</title>
 
 <style>
@@ -11,51 +12,70 @@
 body{
  margin:0;
  font-family:Tahoma,Arial,sans-serif;
- background:#f3f5fa;
+ background:#eef1f6;
  color:#172033;
 }
 button,input{font:inherit}
 button{cursor:pointer;border:0}
-.header{
- background:#172b46;color:white;
- padding:15px 18px;
- display:flex;align-items:center;gap:12px;
-}
-.logo{
- width:43px;height:43px;
- background:#ffffff20;
- border-radius:13px;
- display:grid;place-items:center;
- font-size:23px;
-}
-.header-info{flex:1}
-.header-info strong{display:block;font-size:17px}
-.header-info small{color:#b9c9dc}
-.status{font-size:11px;color:#8ee6ac}
-.container{
+.app{
  max-width:850px;
  margin:auto;
  height:100dvh;
  display:flex;
  flex-direction:column;
- background:white;
- box-shadow:0 0 25px #00000008;
+ background:#fff;
+}
+.header{
+ background:#172b46;
+ color:white;
+ padding:13px 16px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+.logo{
+ width:43px;height:43px;
+ background:#ffffff20;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ font-size:23px;
+}
+.header-info{flex:1}
+.header-info strong{display:block;font-size:16px}
+.header-info small{color:#b9c9dc;font-size:11px}
+.status{font-size:11px;color:#8ee6ac}
+.icon-btn{
+ width:42px;height:42px;
+ border-radius:50%;
+ background:#eef3fa;
+ color:#345b91;
+ font-size:19px;
+}
+.header .icon-btn{
+ background:#ffffff18;
+ color:white;
 }
 #messages{
- flex:1;overflow-y:auto;
- padding:17px;
+ flex:1;
+ overflow-y:auto;
+ padding:16px;
  background:#f5f7fb;
+ scroll-behavior:smooth;
 }
 .message{
- display:flex;gap:9px;
- margin-bottom:17px;
+ display:flex;
  align-items:flex-start;
+ gap:9px;
+ margin-bottom:16px;
 }
 .message.mine{flex-direction:row-reverse}
 .avatar{
  width:39px;height:39px;
- border-radius:50%;object-fit:cover;
- background:#ddd;flex-shrink:0;
+ border-radius:50%;
+ object-fit:cover;
+ background:#ddd;
+ flex-shrink:0;
 }
 .bubble{
  max-width:78%;
@@ -63,85 +83,152 @@ button{cursor:pointer;border:0}
  border:1px solid #e8ebf1;
  padding:10px 13px;
  border-radius:13px 13px 13px 3px;
- box-shadow:0 2px 5px #00000005;
  overflow-wrap:anywhere;
+ box-shadow:0 2px 5px #00000005;
 }
 .mine .bubble{
  background:#e4efff;
  border-color:#d9e7ff;
  border-radius:13px 13px 3px 13px;
 }
-.sender{font-size:12px;color:#5578bb;font-weight:bold;margin-bottom:5px}
-.content{font-size:14px;line-height:1.7;white-space:pre-wrap}
-.time{font-size:10px;color:#9aa4b3;margin-top:6px}
+.sender{
+ font-size:12px;
+ color:#5578bb;
+ font-weight:bold;
+ margin-bottom:5px;
+}
+.content{
+ font-size:14px;
+ line-height:1.8;
+ white-space:pre-wrap;
+}
+.time{
+ font-size:10px;
+ color:#9aa4b3;
+ margin-top:6px;
+}
 .message-image{
- max-width:230px;width:100%;
- display:block;border-radius:9px;margin-top:5px;
+ max-width:240px;
+ max-height:300px;
+ width:100%;
+ object-fit:contain;
+ display:block;
+ border-radius:9px;
+ margin-top:5px;
+ cursor:pointer;
 }
 .composer{
- padding:12px;
+ padding:11px;
  border-top:1px solid #edf0f5;
- display:flex;gap:9px;align-items:center;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ background:white;
 }
-.composer input{
- flex:1;min-width:0;
+.composer input[type=text]{
+ flex:1;
+ min-width:0;
  border:1px solid #e1e5ed;
- border-radius:25px;padding:12px;
+ border-radius:25px;
+ padding:12px 15px;
  outline:none;
 }
-.icon-btn{
- width:43px;height:43px;
- border-radius:50%;
- background:#eef3fa;color:#345b91;
- font-size:19px;
-}
-.send{
- background:#416ee8;color:white;
-}
+.send{background:#416ee8;color:white}
 .screen{
- position:fixed;inset:0;
+ position:fixed;
+ inset:0;
  background:#f3f5fa;
- display:flex;align-items:center;justify-content:center;
- padding:18px;z-index:10;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
+ z-index:10;
 }
 .panel{
- width:100%;max-width:390px;
- background:white;padding:25px;
+ width:100%;
+ max-width:390px;
+ background:white;
+ padding:24px;
  border-radius:20px;
  box-shadow:0 10px 35px #00000012;
 }
 .panel h2{margin-top:0}
 .panel input{
- width:100%;padding:13px;
+ width:100%;
+ padding:12px;
  border:1px solid #dfe4ed;
- border-radius:10px;margin:8px 0;
-}
-.primary{
- background:#416ee8;color:white;
- padding:13px;border-radius:10px;width:100%;
- margin-top:10px;
+ border-radius:10px;
+ margin:8px 0;
+ outline:none;
 }
 .preview{
  width:85px;height:85px;
- border-radius:50%;object-fit:cover;
- display:block;margin:12px auto;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:12px auto;
  background:#eee;
+}
+.primary{
+ background:#416ee8;
+ color:white;
+ padding:13px;
+ border-radius:10px;
+ width:100%;
+ margin-top:10px;
+}
+.secondary{
+ background:#64748b;
+ color:white;
+}
+.danger{
+ background:#fee2e2;
+ color:#b91c1c;
 }
 .hidden{display:none!important}
 .settings{
- position:fixed;inset:0;
- background:#0008;z-index:20;
- display:flex;align-items:center;justify-content:center;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:20;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  padding:15px;
 }
-.settings .panel{max-height:90vh;overflow:auto}
+.settings .panel{
+ max-height:90vh;
+ overflow:auto;
+}
 .notice{
- font-size:12px;color:#788497;line-height:1.8;
+ font-size:12px;
+ color:#788497;
+ line-height:1.8;
  margin-top:12px;
 }
-#loading{text-align:center;padding:20px;color:#718096}
+#loading{
+ text-align:center;
+ padding:20px;
+ color:#718096;
+ font-size:13px;
+}
+.error{
+ color:#b91c1c;
+ background:#fee2e2;
+ padding:12px;
+ border-radius:10px;
+ font-size:12px;
+ margin:10px;
+ overflow-wrap:anywhere;
+}
+.info{
+ color:#2563eb;
+ background:#eff6ff;
+ padding:10px;
+ border-radius:10px;
+ font-size:12px;
+}
 @media(max-width:500px){
- .container{height:100dvh}
  .bubble{max-width:84%}
 }
 </style>
@@ -149,79 +236,212 @@ button{cursor:pointer;border:0}
 
 <body>
 
-<div class="container">
+<div class="app">
 
- <header class="header">
-  <div class="logo">💬</div>
-  <div class="header-info">
-   <strong>MedAtlas Groups</strong>
-   <small>مجموعة المحادثة العامة</small>
-  </div>
-  <div class="status">● مباشر</div>
-  <button class="icon-btn" onclick="openSettings()">⚙</button>
- </header>
+<header class="header">
+ <div class="logo">💬</div>
 
- <main id="messages">
-  <div id="loading">جاري تحميل المحادثة...</div>
- </main>
-
- <div class="composer">
-  <button class="icon-btn" onclick="document.getElementById('imageInput').click()">📎</button>
-  <input id="messageInput" placeholder="اكتب رسالتك..." maxlength="2000">
-  <button class="icon-btn send" onclick="sendMessage()">➤</button>
-  <input type="file" id="imageInput" accept="image/*" hidden onchange="sendImage(event)">
+ <div class="header-info">
+  <strong>MedAtlas Groups</strong>
+  <small>مجموعة المحادثة العامة</small>
  </div>
 
+ <div class="status" id="connectionStatus">● جاهز</div>
+
+ <button class="icon-btn" onclick="openSettings()">⚙</button>
+</header>
+
+<main id="messages">
+ <div id="loading">جاري تحميل المحادثة...</div>
+</main>
+
+<div class="composer">
+
+ <button class="icon-btn"
+ onclick="document.getElementById('imageInput').click()">
+  📎
+ </button>
+
+ <input
+ type="text"
+ id="messageInput"
+ placeholder="اكتب رسالتك..."
+ maxlength="2000"
+ >
+
+ <button class="icon-btn send" id="sendButton"
+ onclick="sendMessage()">
+  ➤
+ </button>
+
+ <input
+ type="file"
+ id="imageInput"
+ accept="image/jpeg,image/png,image/webp"
+ hidden
+ onchange="sendImage(event)"
+ >
+
+</div>
 </div>
 
-<!-- إعداد المستخدم -->
+<!-- شاشة المستخدم -->
+
 <div class="screen hidden" id="profileScreen">
+
  <div class="panel">
+
   <h2>مرحباً بك 👋</h2>
   <p>اختر اسمك وصورتك للانضمام إلى المجموعة.</p>
-  <img class="preview" id="avatarPreview">
-  <input type="file" id="avatarInput" accept="image/*" onchange="previewAvatar(event)">
-  <input id="userName" placeholder="اسم المستخدم" maxlength="35">
-  <button class="primary" onclick="saveProfile()">دخول المجموعة</button>
+
+  <img class="preview" id="avatarPreview"
+  src="https://ui-avatars.com/api/?name=User">
+
+  <label>صورتك الشخصية</label>
+  <input type="file" id="avatarInput"
+  accept="image/*" onchange="previewAvatar(event)">
+
+  <label>اسم المستخدم</label>
+  <input id="userName" placeholder="اكتب اسمك" maxlength="35">
+
+  <button class="primary" id="profileButton"
+  onclick="saveProfile()">
+   دخول المجموعة
+  </button>
+
  </div>
 </div>
 
 <!-- الإعدادات -->
+
 <div class="settings hidden" id="settingsScreen">
+
  <div class="panel">
+
   <h2>إعدادات الاتصال</h2>
-  <input id="tokenInput" type="password" placeholder="GitHub Token">
-  <button class="primary" onclick="saveToken()">حفظ التوكن</button>
-  <button class="primary" style="background:#64748b" onclick="changeProfile()">تغيير بياناتي</button>
-  <button class="primary" style="background:#ddd;color:#222" onclick="closeSettings()">إغلاق</button>
+
+  <label>GitHub Token</label>
+  <input id="tokenInput" type="password"
+  placeholder="أدخل GitHub Token">
+
+  <button class="primary" onclick="saveToken()">
+   حفظ التوكن والاتصال
+  </button>
+
+  <button class="primary secondary"
+  onclick="changeProfile()">
+   تغيير بيانات المستخدم
+  </button>
+
+  <button class="primary danger"
+  onclick="closeSettings()">
+   إغلاق
+  </button>
+
   <p class="notice">
-   هذا نموذج تجريبي. التوكن المخزن في المتصفح ليس آمناً
-   ولا ينبغي استخدامه على موقع عام.
+   نسخة تجريبية. التوكن المخزن في المتصفح
+   يمكن استخراجه. لا تستخدم توكناً بصلاحيات
+   مستودعات أخرى.
   </p>
+
  </div>
 </div>
 
 <script>
-/* إعداد المستودع */
+
+/* =================================
+   إعداد المستودع
+================================= */
+
 const OWNER = "e-hr1";
 const REPO = "MedAtlas_Groups";
 const BRANCH = "main";
 
-const API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
+const API =
+ `https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
 
 let token = localStorage.getItem("ma_token") || "";
-let user = JSON.parse(localStorage.getItem("ma_user") || "null");
+
+let user = null;
+
+try {
+ user = JSON.parse(localStorage.getItem("ma_user") || "null");
+} catch(e) {
+ localStorage.removeItem("ma_user");
+}
+
 let selectedAvatar = null;
 let sending = false;
-let lastMessageIds = new Set();
+let refreshing = false;
+let timer = null;
 
 const messagesBox = document.getElementById("messages");
 
-/* GitHub API */
-async function githubRequest(path, options={}) {
- if(!token) throw new Error("أدخل GitHub Token أولاً");
+/* =================================
+   أدوات مساعدة
+================================= */
 
- const response = await fetch(API + path,{
+function setStatus(text){
+ document.getElementById("connectionStatus").textContent=text;
+}
+
+function showError(message){
+ messagesBox.innerHTML="";
+ const div=document.createElement("div");
+ div.className="error";
+ div.textContent=message;
+ messagesBox.appendChild(div);
+}
+
+function showLoading(text){
+ messagesBox.innerHTML="";
+ const div=document.createElement("div");
+ div.id="loading";
+ div.textContent=text;
+ messagesBox.appendChild(div);
+}
+
+function decodeBase64(content){
+
+ const clean=content.replace(/\s/g,"");
+ const binary=atob(clean);
+
+ const bytes=new Uint8Array(binary.length);
+
+ for(let i=0;i<binary.length;i++){
+  bytes[i]=binary.charCodeAt(i);
+ }
+
+ return new TextDecoder("utf-8").decode(bytes);
+}
+
+function encodeBase64(text){
+
+ const bytes=new TextEncoder().encode(text);
+
+ let binary="";
+ const chunk=0x8000;
+
+ for(let i=0;i<bytes.length;i+=chunk){
+  binary+=String.fromCharCode(
+   ...bytes.subarray(i,i+chunk)
+  );
+ }
+
+ return btoa(binary);
+}
+
+/* =================================
+   GitHub API
+================================= */
+
+async function githubRequest(path,options={}){
+
+ if(!token){
+  throw new Error("لم يتم إدخال GitHub Token");
+ }
+
+ const response=await fetch(API+path,{
   ...options,
   headers:{
    "Accept":"application/vnd.github+json",
@@ -231,59 +451,131 @@ async function githubRequest(path, options={}) {
   }
  });
 
- if(!response.ok){
-  const error = await response.json().catch(()=>({}));
-  throw new Error(error.message || "GitHub API Error: "+response.status);
+ const text=await response.text();
+
+ let result;
+
+ try{
+  result=JSON.parse(text);
+ }catch(e){
+  throw new Error(
+   "استجابة GitHub غير صالحة: "+text.slice(0,200)
+  );
  }
- return response.json();
+
+ if(!response.ok){
+  throw new Error(
+   result.message || "GitHub Error "+response.status
+  );
+ }
+
+ return result;
 }
 
-/* قراءة الملفات */
+/* =================================
+   قراءة JSON
+================================= */
+
 async function readJSON(path){
- const result = await githubRequest(path+"?ref="+BRANCH);
- const decoded = decodeURIComponent(
-  escape(atob(result.content.replace(/\n/g,"")))
+
+ const result=await githubRequest(
+  path+"?ref="+encodeURIComponent(BRANCH)
  );
- return {
-  data:JSON.parse(decoded),
-  sha:result.sha
- };
+
+ if(!result.content){
+  throw new Error(
+   "ملف "+path+" فارغ أو لا يحتوي على محتوى"
+  );
+ }
+
+ const decoded=decodeBase64(result.content);
+
+ try{
+
+  const data=JSON.parse(decoded);
+
+  if(!data || typeof data!=="object"){
+   throw new Error("بنية JSON غير صحيحة");
+  }
+
+  return {
+   data:data,
+   sha:result.sha
+  };
+
+ }catch(e){
+
+  console.error("اسم الملف:",path);
+  console.error("المحتوى المستلم:",decoded);
+
+  throw new Error(
+   "محتوى "+path+" ليس JSON صالحاً. "+
+   "بداية المحتوى: "+decoded.slice(0,80)
+  );
+ }
 }
 
-/* كتابة الملفات */
+/* =================================
+   كتابة JSON
+================================= */
+
 async function writeJSON(path,data,sha){
- const content = btoa(unescape(encodeURIComponent(
+
+ const content=encodeBase64(
   JSON.stringify(data,null,2)
- )));
+ );
+
  return githubRequest(path,{
   method:"PUT",
   body:JSON.stringify({
    message:"Update "+path,
-   content,
+   content:content,
    branch:BRANCH,
-   ...(sha?{sha}: {})
+   sha:sha
   })
  });
 }
 
-/* رفع الصور */
+/* =================================
+   رفع الصور
+================================= */
+
 async function uploadImage(file){
- if(file.size > 3*1024*1024){
+
+ if(!file.type.startsWith("image/")){
+  throw new Error("الملف ليس صورة");
+ }
+
+ if(file.size>3*1024*1024){
   throw new Error("حجم الصورة يجب ألا يتجاوز 3MB");
  }
 
- const buffer = await file.arrayBuffer();
- const bytes = new Uint8Array(buffer);
- let binary = "";
+ const buffer=await file.arrayBuffer();
+ const bytes=new Uint8Array(buffer);
+
+ let binary="";
+
  for(let i=0;i<bytes.length;i+=0x8000){
-  binary += String.fromCharCode(...bytes.subarray(i,i+0x8000));
+  binary+=String.fromCharCode(
+   ...bytes.subarray(i,i+0x8000)
+  );
  }
 
- const base64 = btoa(binary);
- const ext = (file.name.split(".").pop() || "jpg")
-  .toLowerCase().replace(/[^a-z0-9]/g,"");
+ const base64=btoa(binary);
 
- const path = `uploads/images/${crypto.randomUUID()}.${ext}`;
+ const ext={
+  "image/jpeg":"jpg",
+  "image/png":"png",
+  "image/webp":"webp",
+  "image/gif":"gif"
+ }[file.type];
+
+ if(!ext){
+  throw new Error("صيغة الصورة غير مدعومة");
+ }
+
+ const path=
+  "uploads/images/"+crypto.randomUUID()+"."+ext;
 
  await githubRequest(path,{
   method:"PUT",
@@ -297,266 +589,478 @@ async function uploadImage(file){
  return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}`;
 }
 
-/* الملف الشخصي */
+/* =================================
+   الملف الشخصي
+================================= */
+
 function previewAvatar(event){
- const file = event.target.files[0];
+
+ const file=event.target.files[0];
+
  if(!file)return;
- if(file.size > 3*1024*1024){
-  alert("الصورة كبيرة جداً");
+
+ if(file.size>3*1024*1024){
+  alert("حجم الصورة أكبر من 3MB");
+  event.target.value="";
   return;
  }
- selectedAvatar = file;
- document.getElementById("avatarPreview").src =
+
+ selectedAvatar=file;
+
+ document.getElementById("avatarPreview").src=
   URL.createObjectURL(file);
 }
 
 async function saveProfile(){
- const name = document.getElementById("userName").value.trim();
- if(!name)return alert("اكتب اسمك");
 
- if(!token)return alert("أدخل التوكن أولاً من الإعدادات");
+ const name=document.getElementById("userName")
+ .value.trim();
+
+ if(!name)return alert("اكتب اسمك أولاً");
+
+ if(!token)return alert("أدخل GitHub Token أولاً");
+
+ const button=document.getElementById("profileButton");
+
+ button.disabled=true;
+ button.textContent="جاري الحفظ...";
 
  try{
-  let avatar = user?.avatar || "";
+
+  let avatar=user?.avatar || "";
 
   if(selectedAvatar){
-   avatar = await uploadImage(selectedAvatar);
+   avatar=await uploadImage(selectedAvatar);
   }
 
   if(!avatar){
-   avatar = "https://ui-avatars.com/api/?name="+encodeURIComponent(name);
+   avatar=
+    "https://ui-avatars.com/api/?background=416ee8&color=fff&name="+
+    encodeURIComponent(name);
   }
 
-  user = {
+  user={
    id:user?.id || crypto.randomUUID(),
-   name,
-   avatar
+   name:name,
+   avatar:avatar
   };
 
   localStorage.setItem("ma_user",JSON.stringify(user));
 
-  // تحديث قائمة المستخدمين
-  const result = await readJSON("users.json");
-  const users = result.data.users || [];
-  const index = users.findIndex(u=>u.id===user.id);
+  const result=await readJSON("users.json");
 
-  const profile = {...user,updatedAt:new Date().toISOString()};
+  const users=Array.isArray(result.data.users)
+   ? result.data.users : [];
 
-  if(index>=0)users[index]=profile;
-  else users.push(profile);
+  const index=users.findIndex(u=>u.id===user.id);
+
+  const profile={
+   ...user,
+   updatedAt:new Date().toISOString()
+  };
+
+  if(index>=0){
+   users[index]=profile;
+  }else{
+   users.push(profile);
+  }
 
   await writeJSON("users.json",{users},result.sha);
 
-  document.getElementById("profileScreen").classList.add("hidden");
-  loadMessages();
+  document.getElementById("profileScreen")
+   .classList.add("hidden");
+
+  startChat();
 
  }catch(e){
-  alert("تعذر حفظ الملف الشخصي: "+e.message);
+
+  alert("تعذر حفظ المستخدم: "+e.message);
+
+ }finally{
+
+  button.disabled=false;
+  button.textContent="دخول المجموعة";
+
  }
 }
 
-/* عرض الرسائل */
+/* =================================
+   عرض الرسائل
+================================= */
+
 async function loadMessages(){
+
+ if(refreshing || !token || !user)return;
+
+ refreshing=true;
+
  try{
-  const result = await readJSON("messages.json");
-  const messages = result.data.messages || [];
 
-  const sorted = messages.slice(-300);
+  const result=await readJSON("messages.json");
 
-  messagesBox.innerHTML="";
+  const messages=Array.isArray(result.data.messages)
+   ? result.data.messages : [];
 
-  if(!sorted.length){
-   messagesBox.innerHTML="<div id='loading'>لا توجد رسائل بعد. ابدأ المحادثة 👋</div>";
+  renderMessages(messages);
+
+  setStatus("● متصل");
+
+ }catch(e){
+
+  console.error(e);
+  setStatus("● خطأ");
+
+  showError(
+   "تعذر تحميل الرسائل: "+e.message
+  );
+
+ }finally{
+
+  refreshing=false;
+
+ }
+}
+
+function renderMessages(messages){
+
+ const oldScroll=
+  messagesBox.scrollHeight-messagesBox.scrollTop-
+  messagesBox.clientHeight;
+
+ messagesBox.innerHTML="";
+
+ const visible=messages.slice(-300);
+
+ if(!visible.length){
+
+  showLoading("لا توجد رسائل بعد. ابدأ المحادثة 👋");
+  return;
+
+ }
+
+ visible.forEach(m=>{
+
+  const row=document.createElement("div");
+
+  row.className="message"+
+   (m.userId===user.id?" mine":"");
+
+  const avatar=document.createElement("img");
+
+  avatar.className="avatar";
+  avatar.src=m.avatar || "";
+  avatar.alt="";
+
+  avatar.onerror=()=>{
+   avatar.src="https://ui-avatars.com/api/?name=User";
+  };
+
+  const bubble=document.createElement("div");
+  bubble.className="bubble";
+
+  const sender=document.createElement("div");
+  sender.className="sender";
+  sender.textContent=m.name || "مستخدم";
+
+  bubble.appendChild(sender);
+
+  if(m.text){
+
+   const content=document.createElement("div");
+   content.className="content";
+   content.textContent=m.text;
+
+   bubble.appendChild(content);
   }
 
-  sorted.forEach(m=>{
-   const mine = user && m.userId===user.id;
+  if(m.image){
 
-   const row=document.createElement("div");
-   row.className="message"+(mine?" mine":"");
+   const img=document.createElement("img");
 
-   const avatar=document.createElement("img");
-   avatar.className="avatar";
-   avatar.src=m.avatar || "";
+   img.className="message-image";
+   img.src=m.image;
+   img.loading="lazy";
 
-   const bubble=document.createElement("div");
-   bubble.className="bubble";
+   img.onclick=()=>{
+    window.open(m.image,"_blank");
+   };
 
-   const sender=document.createElement("div");
-   sender.className="sender";
-   sender.textContent=m.name || "مستخدم";
+   bubble.appendChild(img);
+  }
 
-   bubble.appendChild(sender);
+  const time=document.createElement("div");
 
-   if(m.text){
-    const content=document.createElement("div");
-    content.className="content";
-    content.textContent=m.text;
-    bubble.appendChild(content);
-   }
+  time.className="time";
 
-   if(m.image){
-    const img=document.createElement("img");
-    img.className="message-image";
-    img.src=m.image;
-    img.loading="lazy";
-    img.onclick=()=>window.open(m.image,"_blank");
-    bubble.appendChild(img);
-   }
+  const date=new Date(m.time);
 
-   const time=document.createElement("div");
-   time.className="time";
-   time.textContent=new Date(m.time).toLocaleString("ar");
-   bubble.appendChild(time);
+  time.textContent=
+   isNaN(date.getTime())
+    ? ""
+    : date.toLocaleString("ar");
 
-   row.appendChild(avatar);
-   row.appendChild(bubble);
-   messagesBox.appendChild(row);
-  });
+  bubble.appendChild(time);
 
+  row.appendChild(avatar);
+  row.appendChild(bubble);
+
+  messagesBox.appendChild(row);
+
+ });
+
+ if(oldScroll<100){
   messagesBox.scrollTop=messagesBox.scrollHeight;
-
- }catch(e){
-  messagesBox.innerHTML=
-   "<div id='loading'>تعذر تحميل الرسائل: "+
-   escapeHTML(e.message)+"</div>";
  }
+
 }
 
-function escapeHTML(s){
- return String(s).replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",
-  '"':"&quot;","'":"&#39;"
- }[c]));
+/* =================================
+   إضافة رسالة
+================================= */
+
+async function appendMessage(message){
+
+ const result=await readJSON("messages.json");
+
+ const messages=Array.isArray(result.data.messages)
+  ? result.data.messages : [];
+
+ messages.push(message);
+
+ await writeJSON(
+  "messages.json",
+  {messages:messages.slice(-500)},
+  result.sha
+ );
 }
 
-/* إرسال رسالة */
+/* =================================
+   إرسال نص
+================================= */
+
 async function sendMessage(){
+
  const input=document.getElementById("messageInput");
+
  const text=input.value.trim();
 
  if(!text || sending)return;
+
  if(!user)return alert("أدخل بيانات المستخدم أولاً");
 
  sending=true;
 
+ document.getElementById("sendButton").disabled=true;
+
  try{
+
   await appendMessage({
+
    id:crypto.randomUUID(),
    userId:user.id,
    name:user.name,
    avatar:user.avatar,
-   text,
+   text:text,
    image:"",
    time:new Date().toISOString()
+
   });
 
   input.value="";
+
   await loadMessages();
 
  }catch(e){
-  alert("فشل الإرسال: "+e.message);
+
+  alert("تعذر إرسال الرسالة: "+e.message);
+
  }finally{
+
   sending=false;
+  document.getElementById("sendButton").disabled=false;
+
  }
+
 }
 
-/* إرسال صورة */
+/* =================================
+   إرسال صورة
+================================= */
+
 async function sendImage(event){
+
  const file=event.target.files[0];
+
  event.target.value="";
+
  if(!file || !user)return;
 
+ if(sending)return;
+
+ sending=true;
+
  try{
+
+  setStatus("● رفع الصورة...");
+
   const image=await uploadImage(file);
 
   await appendMessage({
+
    id:crypto.randomUUID(),
    userId:user.id,
    name:user.name,
    avatar:user.avatar,
    text:"",
-   image,
+   image:image,
    time:new Date().toISOString()
+
   });
 
   await loadMessages();
 
  }catch(e){
-  alert("فشل رفع الصورة: "+e.message);
+
+  alert("تعذر إرسال الصورة: "+e.message);
+
+ }finally{
+
+  sending=false;
+  setStatus("● متصل");
+
  }
+
 }
 
-/* إضافة رسالة */
-async function appendMessage(message){
- const result=await readJSON("messages.json");
- const messages=result.data.messages || [];
+/* =================================
+   إعدادات
+================================= */
 
- messages.push(message);
-
- await writeJSON("messages.json",{
-  messages:messages.slice(-500)
- },result.sha);
-}
-
-/* الإعدادات */
 function openSettings(){
- document.getElementById("settingsScreen").classList.remove("hidden");
+
+ document.getElementById("settingsScreen")
+ .classList.remove("hidden");
+
  document.getElementById("tokenInput").value=token;
+
 }
 
 function closeSettings(){
- document.getElementById("settingsScreen").classList.add("hidden");
+
+ document.getElementById("settingsScreen")
+ .classList.add("hidden");
+
 }
 
-function saveToken(){
- token=document.getElementById("tokenInput").value.trim();
- if(!token)return alert("أدخل التوكن");
+async function saveToken(){
+
+ const value=document.getElementById("tokenInput")
+ .value.trim();
+
+ if(!value)return alert("أدخل التوكن");
+
+ token=value;
 
  localStorage.setItem("ma_token",token);
+
  closeSettings();
- initialize();
+
+ await initialize();
+
 }
 
 function changeProfile(){
+
  closeSettings();
- document.getElementById("profileScreen").classList.remove("hidden");
- document.getElementById("userName").value=user?.name || "";
+
+ document.getElementById("userName").value=
+  user?.name || "";
+
+ document.getElementById("profileScreen")
+ .classList.remove("hidden");
+
 }
 
-/* بدء التطبيق */
-async function initialize(){
- if(!token){
-  openSettings();
-  return;
- }
+/* =================================
+   تشغيل المحادثة
+================================= */
 
- try{
-  await readJSON("messages.json");
+function startChat(){
 
-  if(!user){
-   document.getElementById("profileScreen").classList.remove("hidden");
-  }else{
+ document.getElementById("profileScreen")
+ .classList.add("hidden");
+
+ loadMessages();
+
+ if(timer)clearInterval(timer);
+
+ timer=setInterval(()=>{
+
+  if(!document.hidden){
    loadMessages();
   }
- }catch(e){
-  alert("تعذر الاتصال بمستودع GitHub: "+e.message);
- }
+
+ },5000);
+
 }
 
-/* التحديث التلقائي */
-setInterval(()=>{
- if(token && user && !sending){
-  loadMessages();
+async function initialize(){
+
+ if(!token){
+
+  openSettings();
+  showLoading("أدخل GitHub Token للاتصال");
+  return;
+
  }
-},5000);
+
+ showLoading("جاري الاتصال بالمستودع...");
+
+ try{
+
+  // اختبار وجود الملفين وصحة JSON
+  await readJSON("messages.json");
+  await readJSON("users.json");
+
+  if(!user){
+
+   document.getElementById("profileScreen")
+    .classList.remove("hidden");
+
+  }else{
+
+   startChat();
+
+  }
+
+ }catch(e){
+
+  showError("خطأ في الاتصال: "+e.message);
+
+  console.error(e);
+
+ }
+
+}
+
+/* =================================
+   أحداث لوحة المفاتيح
+================================= */
 
 document.getElementById("messageInput")
 .addEventListener("keydown",e=>{
- if(e.key==="Enter")sendMessage();
+
+ if(e.key==="Enter"){
+  e.preventDefault();
+  sendMessage();
+ }
+
 });
 
+/* تشغيل */
+
 initialize();
+
 </script>
 
 </body>
