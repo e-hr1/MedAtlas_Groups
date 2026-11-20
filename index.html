@@ -3,233 +3,287 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#172b46">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101827">
 <title>MedAtlas Groups</title>
 
 <style>
+:root {
+  --bg:#0b1220;
+  --panel:#111c2e;
+  --panel2:#18263a;
+  --text:#f3f6fc;
+  --muted:#91a1b8;
+  --accent:#6485ff;
+  --border:rgba(255,255,255,.08);
+  --mine:#304d9b;
+  --other:#1b2a40;
+}
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Tahoma,Arial,sans-serif;
- background:#eef1f6;
- color:#172033;
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;
+  background:var(--bg);
+  color:var(--text);
+  height:100dvh;
+  overflow:hidden;
 }
 button,input{font:inherit}
-button{cursor:pointer;border:0}
+button{cursor:pointer}
 .app{
- max-width:850px;
- margin:auto;
- height:100dvh;
- display:flex;
- flex-direction:column;
- background:#fff;
+  height:100dvh;
+  max-width:850px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  background:var(--bg);
+  position:relative;
 }
-.header{
- background:#172b46;
- color:white;
- padding:13px 16px;
- display:flex;
- align-items:center;
- gap:12px;
+header{
+  height:68px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 16px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  z-index:2;
 }
 .logo{
- width:43px;height:43px;
- background:#ffffff20;
- border-radius:13px;
- display:grid;
- place-items:center;
- font-size:23px;
+  width:43px;height:43px;
+  border-radius:14px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#688cff,#4256bd);
+  font-size:22px;
 }
-.header-info{flex:1}
-.header-info strong{display:block;font-size:16px}
-.header-info small{color:#b9c9dc;font-size:11px}
-.status{font-size:11px;color:#8ee6ac}
+.head-info{flex:1;min-width:0}
+.head-info strong{display:block;font-size:15px}
+.head-info small{color:var(--muted);font-size:12px}
+.status-dot{
+  display:inline-block;width:7px;height:7px;
+  border-radius:50%;background:#37d99b;
+  margin-left:5px;
+}
 .icon-btn{
- width:42px;height:42px;
- border-radius:50%;
- background:#eef3fa;
- color:#345b91;
- font-size:19px;
+  width:40px;height:40px;
+  border:0;border-radius:13px;
+  color:var(--text);background:var(--panel2);
+  font-size:19px;
 }
-.header .icon-btn{
- background:#ffffff18;
- color:white;
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:18px 13px 25px;
+  scroll-behavior:smooth;
+  overscroll-behavior:contain;
 }
-#messages{
- flex:1;
- overflow-y:auto;
- padding:16px;
- background:#f5f7fb;
- scroll-behavior:smooth;
+.messages::-webkit-scrollbar{width:4px}
+.messages::-webkit-scrollbar-thumb{
+  background:#34445d;border-radius:10px
+}
+.date-label{
+  text-align:center;
+  margin:10px 0 20px;
+}
+.date-label span{
+  background:var(--panel);
+  color:var(--muted);
+  padding:6px 13px;
+  border-radius:20px;
+  font-size:11px;
 }
 .message{
- display:flex;
- align-items:flex-start;
- gap:9px;
- margin-bottom:16px;
+  display:flex;
+  gap:8px;
+  margin:12px 0;
+  align-items:flex-end;
+  animation:appear .18s ease;
 }
 .message.mine{flex-direction:row-reverse}
+@keyframes appear{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
 .avatar{
- width:39px;height:39px;
- border-radius:50%;
- object-fit:cover;
- background:#ddd;
- flex-shrink:0;
+  width:34px;height:34px;
+  border-radius:50%;object-fit:cover;
+  background:var(--panel2);
+  flex-shrink:0;
 }
 .bubble{
- max-width:78%;
- background:white;
- border:1px solid #e8ebf1;
- padding:10px 13px;
- border-radius:13px 13px 13px 3px;
- overflow-wrap:anywhere;
- box-shadow:0 2px 5px #00000005;
+  max-width:min(78%,520px);
+  padding:10px 12px 7px;
+  border-radius:17px;
+  background:var(--other);
+  overflow-wrap:anywhere;
 }
 .mine .bubble{
- background:#e4efff;
- border-color:#d9e7ff;
- border-radius:13px 13px 3px 13px;
+  background:var(--mine);
+  border-bottom-right-radius:5px;
+}
+.message:not(.mine) .bubble{
+  border-bottom-left-radius:5px;
 }
 .sender{
- font-size:12px;
- color:#5578bb;
- font-weight:bold;
- margin-bottom:5px;
+  font-size:11px;
+  font-weight:700;
+  color:#a9bcff;
+  margin-bottom:5px;
 }
-.content{
- font-size:14px;
- line-height:1.8;
- white-space:pre-wrap;
+.message-text{
+  white-space:pre-wrap;
+  line-height:1.65;
+  font-size:14px;
 }
-.time{
- font-size:10px;
- color:#9aa4b3;
- margin-top:6px;
+.msg-image{
+  max-width:100%;
+  max-height:260px;
+  display:block;
+  border-radius:11px;
+  margin-top:5px;
+  object-fit:cover;
+  cursor:pointer;
 }
-.message-image{
- max-width:240px;
- max-height:300px;
- width:100%;
- object-fit:contain;
- display:block;
- border-radius:9px;
- margin-top:5px;
- cursor:pointer;
+.meta{
+  display:flex;
+  justify-content:flex-end;
+  gap:5px;
+  margin-top:5px;
+  color:#c1cce0;
+  font-size:10px;
+  opacity:.8;
 }
-.composer{
- padding:11px;
- border-top:1px solid #edf0f5;
- display:flex;
- align-items:center;
- gap:8px;
- background:white;
-}
-.composer input[type=text]{
- flex:1;
- min-width:0;
- border:1px solid #e1e5ed;
- border-radius:25px;
- padding:12px 15px;
- outline:none;
-}
-.send{background:#416ee8;color:white}
-.screen{
- position:fixed;
- inset:0;
- background:#f3f5fa;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:18px;
- z-index:10;
-}
-.panel{
- width:100%;
- max-width:390px;
- background:white;
- padding:24px;
- border-radius:20px;
- box-shadow:0 10px 35px #00000012;
-}
-.panel h2{margin-top:0}
-.panel input{
- width:100%;
- padding:12px;
- border:1px solid #dfe4ed;
- border-radius:10px;
- margin:8px 0;
- outline:none;
+.composer-wrap{
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  background:var(--panel);
+  border-top:1px solid var(--border);
+  flex-shrink:0;
 }
 .preview{
- width:85px;height:85px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:12px auto;
- background:#eee;
+  display:none;
+  padding:5px 0 10px;
+  align-items:center;
+  gap:10px;
+}
+.preview img{
+  width:55px;height:55px;
+  border-radius:10px;object-fit:cover;
+}
+.preview button{
+  border:0;background:#263650;color:white;
+  width:30px;height:30px;border-radius:50%;
+}
+.composer{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+}
+.attach{
+  width:43px;height:43px;
+  flex-shrink:0;
+  border:0;border-radius:14px;
+  background:var(--panel2);
+  color:var(--text);font-size:21px;
+}
+#messageInput{
+  flex:1;min-width:0;
+  max-height:120px;
+  resize:none;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:12px 14px;
+  outline:none;
+  color:var(--text);
+  background:var(--panel2);
+  font-size:14px;
+}
+#messageInput:focus{border-color:var(--accent)}
+.send{
+  width:44px;height:44px;
+  border:0;border-radius:14px;
+  background:var(--accent);
+  color:white;font-size:19px;
+  flex-shrink:0;
+}
+.send:disabled{opacity:.5}
+.notice{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:7px 0 0;
+}
+.empty{
+  text-align:center;
+  color:var(--muted);
+  margin-top:90px;
+}
+.empty div{font-size:42px;margin-bottom:12px}
+#setup{
+  position:fixed;inset:0;
+  z-index:10;
+  display:none;
+  align-items:center;justify-content:center;
+  background:#080f1c;
+  padding:20px;
+}
+.setup-card{
+  width:100%;max-width:370px;
+  background:var(--panel);
+  padding:25px;
+  border-radius:24px;
+  border:1px solid var(--border);
+  text-align:center;
+}
+.setup-card h2{margin:0 0 8px}
+.setup-card p{color:var(--muted);font-size:13px}
+.profile-preview{
+  width:90px;height:90px;
+  margin:20px auto;
+  border-radius:50%;
+  object-fit:cover;
+  background:var(--panel2);
+  display:block;
+}
+.field{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  outline:none;
+  background:var(--panel2);
+  color:var(--text);
+  margin:8px 0;
 }
 .primary{
- background:#416ee8;
- color:white;
- padding:13px;
- border-radius:10px;
- width:100%;
- margin-top:10px;
+  width:100%;
+  padding:13px;
+  border:0;border-radius:12px;
+  background:var(--accent);
+  color:white;
+  margin-top:10px;
 }
-.secondary{
- background:#64748b;
- color:white;
+#toast{
+  position:fixed;
+  bottom:105px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#243650;
+  color:white;
+  padding:10px 16px;
+  border-radius:20px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:20;
+  white-space:nowrap;
 }
-.danger{
- background:#fee2e2;
- color:#b91c1c;
-}
-.hidden{display:none!important}
-.settings{
- position:fixed;
- inset:0;
- background:#0008;
- z-index:20;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:15px;
-}
-.settings .panel{
- max-height:90vh;
- overflow:auto;
-}
-.notice{
- font-size:12px;
- color:#788497;
- line-height:1.8;
- margin-top:12px;
-}
-#loading{
- text-align:center;
- padding:20px;
- color:#718096;
- font-size:13px;
-}
-.error{
- color:#b91c1c;
- background:#fee2e2;
- padding:12px;
- border-radius:10px;
- font-size:12px;
- margin:10px;
- overflow-wrap:anywhere;
-}
-.info{
- color:#2563eb;
- background:#eff6ff;
- padding:10px;
- border-radius:10px;
- font-size:12px;
-}
-@media(max-width:500px){
- .bubble{max-width:84%}
+#toast.show{opacity:1}
+#imageInput{display:none}
+@media(min-width:600px){
+  body{background:#070d17}
+  .app{border-left:1px solid var(--border);border-right:1px solid var(--border)}
 }
 </style>
 </head>
@@ -237,831 +291,484 @@ button{cursor:pointer;border:0}
 <body>
 
 <div class="app">
-
-<header class="header">
- <div class="logo">💬</div>
-
- <div class="header-info">
-  <strong>MedAtlas Groups</strong>
-  <small>مجموعة المحادثة العامة</small>
- </div>
-
- <div class="status" id="connectionStatus">● جاهز</div>
-
- <button class="icon-btn" onclick="openSettings()">⚙</button>
+<header>
+  <div class="logo">🩺</div>
+  <div class="head-info">
+    <strong>MedAtlas Groups</strong>
+    <small><span class="status-dot"></span><span id="connection">جاري الاتصال...</span></small>
+  </div>
+  <button class="icon-btn" onclick="openProfile()" title="الملف الشخصي">👤</button>
 </header>
 
-<main id="messages">
- <div id="loading">جاري تحميل المحادثة...</div>
+<main class="messages" id="messages">
+  <div class="empty" id="empty">
+    <div>💬</div>
+    <strong>مرحباً بك في MedAtlas Groups</strong>
+    <p>ابدأ المحادثة مع أعضاء المجموعة</p>
+  </div>
 </main>
 
-<div class="composer">
-
- <button class="icon-btn"
- onclick="document.getElementById('imageInput').click()">
-  📎
- </button>
-
- <input
- type="text"
- id="messageInput"
- placeholder="اكتب رسالتك..."
- maxlength="2000"
- >
-
- <button class="icon-btn send" id="sendButton"
- onclick="sendMessage()">
-  ➤
- </button>
-
- <input
- type="file"
- id="imageInput"
- accept="image/jpeg,image/png,image/webp"
- hidden
- onchange="sendImage(event)"
- >
-
+<div class="composer-wrap">
+  <div class="preview" id="preview">
+    <img id="previewImg">
+    <span style="flex:1;color:var(--muted);font-size:12px">الصورة جاهزة للإرسال</span>
+    <button onclick="removeImage()">×</button>
+  </div>
+  <div class="composer">
+    <button class="attach" onclick="document.getElementById('imageInput').click()">＋</button>
+    <input id="imageInput" type="file" accept="image/*">
+    <textarea id="messageInput" rows="1" placeholder="اكتب رسالتك..."></textarea>
+    <button class="send" id="sendBtn" onclick="sendMessage()">➤</button>
+  </div>
+  <div class="notice">MedAtlas Groups · مساحة للتواصل وتبادل المعرفة</div>
 </div>
 </div>
 
-<!-- شاشة المستخدم -->
-
-<div class="screen hidden" id="profileScreen">
-
- <div class="panel">
-
-  <h2>مرحباً بك 👋</h2>
-  <p>اختر اسمك وصورتك للانضمام إلى المجموعة.</p>
-
-  <img class="preview" id="avatarPreview"
-  src="https://ui-avatars.com/api/?name=User">
-
-  <label>صورتك الشخصية</label>
-  <input type="file" id="avatarInput"
-  accept="image/*" onchange="previewAvatar(event)">
-
-  <label>اسم المستخدم</label>
-  <input id="userName" placeholder="اكتب اسمك" maxlength="35">
-
-  <button class="primary" id="profileButton"
-  onclick="saveProfile()">
-   دخول المجموعة
-  </button>
-
- </div>
+<div id="setup">
+  <div class="setup-card">
+    <h2>مرحباً بك 👋</h2>
+    <p>أنشئ ملفك الشخصي للانضمام إلى المجموعة</p>
+    <img class="profile-preview" id="profilePreview"
+      src="https://placehold.co/100x100/263650/ffffff?text=M">
+    <button class="field" onclick="document.getElementById('avatarInput').click()">اختيار صورة شخصية</button>
+    <input id="avatarInput" type="file" accept="image/*" hidden>
+    <input id="nameInput" class="field" maxlength="30" placeholder="اسمك في المجموعة">
+    <button class="primary" onclick="saveProfile()">دخول المجموعة</button>
+  </div>
 </div>
 
-<!-- الإعدادات -->
-
-<div class="settings hidden" id="settingsScreen">
-
- <div class="panel">
-
-  <h2>إعدادات الاتصال</h2>
-
-  <label>GitHub Token</label>
-  <input id="tokenInput" type="password"
-  placeholder="أدخل GitHub Token">
-
-  <button class="primary" onclick="saveToken()">
-   حفظ التوكن والاتصال
-  </button>
-
-  <button class="primary secondary"
-  onclick="changeProfile()">
-   تغيير بيانات المستخدم
-  </button>
-
-  <button class="primary danger"
-  onclick="closeSettings()">
-   إغلاق
-  </button>
-
-  <p class="notice">
-   نسخة تجريبية. التوكن المخزن في المتصفح
-   يمكن استخراجه. لا تستخدم توكناً بصلاحيات
-   مستودعات أخرى.
-  </p>
-
- </div>
-</div>
+<div id="toast"></div>
 
 <script>
+/* ==========================================
+   MedAtlas Groups - Frontend Configuration
+   ضع رابط Cloudflare Worker هنا بعد تجهيزه.
+   مثال: https://medatlas-groups-api.username.workers.dev
+========================================== */
 
-/* =================================
-   إعداد المستودع
-================================= */
+const API_BASE = "https://YOUR-WORKER-URL.workers.dev";
 
-const OWNER = "e-hr1";
-const REPO = "MedAtlas_Groups";
-const BRANCH = "main";
+const POLL_INTERVAL = 3000;
+const CACHE_KEY = "medatlas_group_messages_v1";
+const PROFILE_KEY = "medatlas_group_profile_v1";
 
-const API =
- `https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
+let profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || "null");
+let selectedImage = null;
+let lastMessageId = "";
+let polling = false;
+let loading = false;
+let messagesMap = new Map();
 
-let token = localStorage.getItem("ma_token") || "";
+/* أدوات عامة */
 
-let user = null;
+const $ = id => document.getElementById(id);
 
-try {
- user = JSON.parse(localStorage.getItem("ma_user") || "null");
-} catch(e) {
- localStorage.removeItem("ma_user");
+function toast(message){
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(()=>el.classList.remove("show"),2500);
 }
 
-let selectedAvatar = null;
-let sending = false;
-let refreshing = false;
-let timer = null;
-
-const messagesBox = document.getElementById("messages");
-
-/* =================================
-   أدوات مساعدة
-================================= */
-
-function setStatus(text){
- document.getElementById("connectionStatus").textContent=text;
+function setConnection(text){
+  $("connection").textContent = text;
 }
 
-function showError(message){
- messagesBox.innerHTML="";
- const div=document.createElement("div");
- div.className="error";
- div.textContent=message;
- messagesBox.appendChild(div);
+function makeId(){
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : Date.now()+"_"+Math.random().toString(36).slice(2);
 }
 
-function showLoading(text){
- messagesBox.innerHTML="";
- const div=document.createElement("div");
- div.id="loading";
- div.textContent=text;
- messagesBox.appendChild(div);
+function timeText(value){
+  const d = value ? new Date(value) : new Date();
+  if(isNaN(d.getTime())) return "";
+  return d.toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"});
 }
 
-function decodeBase64(content){
-
- const clean=content.replace(/\s/g,"");
- const binary=atob(clean);
-
- const bytes=new Uint8Array(binary.length);
-
- for(let i=0;i<binary.length;i++){
-  bytes[i]=binary.charCodeAt(i);
- }
-
- return new TextDecoder("utf-8").decode(bytes);
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#039;"
+  })[c]);
 }
 
-function encodeBase64(text){
+/* الملف الشخصي */
 
- const bytes=new TextEncoder().encode(text);
-
- let binary="";
- const chunk=0x8000;
-
- for(let i=0;i<bytes.length;i+=chunk){
-  binary+=String.fromCharCode(
-   ...bytes.subarray(i,i+chunk)
-  );
- }
-
- return btoa(binary);
+function openProfile(){
+  $("nameInput").value = profile?.name || "";
+  $("profilePreview").src = profile?.avatar || "https://placehold.co/100x100/263650/ffffff?text=M";
+  $("setup").style.display = "flex";
 }
 
-/* =================================
-   GitHub API
-================================= */
-
-async function githubRequest(path,options={}){
-
- if(!token){
-  throw new Error("لم يتم إدخال GitHub Token");
- }
-
- const response=await fetch(API+path,{
-  ...options,
-  headers:{
-   "Accept":"application/vnd.github+json",
-   "Authorization":"Bearer "+token,
-   "X-GitHub-Api-Version":"2022-11-28",
-   ...(options.headers || {})
+$("avatarInput").addEventListener("change", async e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith("image/")) return toast("اختر صورة صحيحة");
+  try{
+    const data = await compressImage(file,300,0.75);
+    selectedImage = data;
+    $("profilePreview").src = data;
+  }catch{
+    toast("تعذر قراءة الصورة");
   }
- });
+});
 
- const text=await response.text();
-
- let result;
-
- try{
-  result=JSON.parse(text);
- }catch(e){
-  throw new Error(
-   "استجابة GitHub غير صالحة: "+text.slice(0,200)
-  );
- }
-
- if(!response.ok){
-  throw new Error(
-   result.message || "GitHub Error "+response.status
-  );
- }
-
- return result;
-}
-
-/* =================================
-   قراءة JSON
-================================= */
-
-async function readJSON(path){
-
- const result=await githubRequest(
-  path+"?ref="+encodeURIComponent(BRANCH)
- );
-
- if(!result.content){
-  throw new Error(
-   "ملف "+path+" فارغ أو لا يحتوي على محتوى"
-  );
- }
-
- const decoded=decodeBase64(result.content);
-
- try{
-
-  const data=JSON.parse(decoded);
-
-  if(!data || typeof data!=="object"){
-   throw new Error("بنية JSON غير صحيحة");
-  }
-
-  return {
-   data:data,
-   sha:result.sha
-  };
-
- }catch(e){
-
-  console.error("اسم الملف:",path);
-  console.error("المحتوى المستلم:",decoded);
-
-  throw new Error(
-   "محتوى "+path+" ليس JSON صالحاً. "+
-   "بداية المحتوى: "+decoded.slice(0,80)
-  );
- }
-}
-
-/* =================================
-   كتابة JSON
-================================= */
-
-async function writeJSON(path,data,sha){
-
- const content=encodeBase64(
-  JSON.stringify(data,null,2)
- );
-
- return githubRequest(path,{
-  method:"PUT",
-  body:JSON.stringify({
-   message:"Update "+path,
-   content:content,
-   branch:BRANCH,
-   sha:sha
-  })
- });
-}
-
-/* =================================
-   رفع الصور
-================================= */
-
-async function uploadImage(file){
-
- if(!file.type.startsWith("image/")){
-  throw new Error("الملف ليس صورة");
- }
-
- if(file.size>3*1024*1024){
-  throw new Error("حجم الصورة يجب ألا يتجاوز 3MB");
- }
-
- const buffer=await file.arrayBuffer();
- const bytes=new Uint8Array(buffer);
-
- let binary="";
-
- for(let i=0;i<bytes.length;i+=0x8000){
-  binary+=String.fromCharCode(
-   ...bytes.subarray(i,i+0x8000)
-  );
- }
-
- const base64=btoa(binary);
-
- const ext={
-  "image/jpeg":"jpg",
-  "image/png":"png",
-  "image/webp":"webp",
-  "image/gif":"gif"
- }[file.type];
-
- if(!ext){
-  throw new Error("صيغة الصورة غير مدعومة");
- }
-
- const path=
-  "uploads/images/"+crypto.randomUUID()+"."+ext;
-
- await githubRequest(path,{
-  method:"PUT",
-  body:JSON.stringify({
-   message:"Upload image",
-   content:base64,
-   branch:BRANCH
-  })
- });
-
- return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}`;
-}
-
-/* =================================
-   الملف الشخصي
-================================= */
-
-function previewAvatar(event){
-
- const file=event.target.files[0];
-
- if(!file)return;
-
- if(file.size>3*1024*1024){
-  alert("حجم الصورة أكبر من 3MB");
-  event.target.value="";
-  return;
- }
-
- selectedAvatar=file;
-
- document.getElementById("avatarPreview").src=
-  URL.createObjectURL(file);
+function compressImage(file,maxSize,quality){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const scale = Math.min(1,maxSize/Math.max(img.width,img.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width*scale);
+        canvas.height = Math.round(img.height*scale);
+        canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
+        resolve(canvas.toDataURL("image/jpeg",quality));
+      };
+      img.onerror = reject;
+      img.src = reader.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 async function saveProfile(){
+  const name = $("nameInput").value.trim();
+  if(!name) return toast("اكتب اسمك أولاً");
 
- const name=document.getElementById("userName")
- .value.trim();
-
- if(!name)return alert("اكتب اسمك أولاً");
-
- if(!token)return alert("أدخل GitHub Token أولاً");
-
- const button=document.getElementById("profileButton");
-
- button.disabled=true;
- button.textContent="جاري الحفظ...";
-
- try{
-
-  let avatar=user?.avatar || "";
-
-  if(selectedAvatar){
-   avatar=await uploadImage(selectedAvatar);
-  }
-
-  if(!avatar){
-   avatar=
-    "https://ui-avatars.com/api/?background=416ee8&color=fff&name="+
-    encodeURIComponent(name);
-  }
-
-  user={
-   id:user?.id || crypto.randomUUID(),
-   name:name,
-   avatar:avatar
+  profile = {
+    uid: profile?.uid || makeId(),
+    name,
+    avatar: selectedImage || profile?.avatar || ""
   };
 
-  localStorage.setItem("ma_user",JSON.stringify(user));
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
+  $("setup").style.display = "none";
+  selectedImage = null;
+  toast("تم حفظ ملفك الشخصي");
+  await registerProfile();
+}
 
-  const result=await readJSON("users.json");
-
-  const users=Array.isArray(result.data.users)
-   ? result.data.users : [];
-
-  const index=users.findIndex(u=>u.id===user.id);
-
-  const profile={
-   ...user,
-   updatedAt:new Date().toISOString()
-  };
-
-  if(index>=0){
-   users[index]=profile;
-  }else{
-   users.push(profile);
+async function registerProfile(){
+  if(!apiReady()) return;
+  try{
+    await api("/users",{
+      method:"POST",
+      body:JSON.stringify({
+        uid:profile.uid,
+        name:profile.name,
+        avatar:profile.avatar
+      })
+    });
+  }catch(e){
+    console.warn("Profile sync:",e);
   }
-
-  await writeJSON("users.json",{users},result.sha);
-
-  document.getElementById("profileScreen")
-   .classList.add("hidden");
-
-  startChat();
-
- }catch(e){
-
-  alert("تعذر حفظ المستخدم: "+e.message);
-
- }finally{
-
-  button.disabled=false;
-  button.textContent="دخول المجموعة";
-
- }
 }
 
-/* =================================
-   عرض الرسائل
-================================= */
+/* الصور */
 
-async function loadMessages(){
+$("imageInput").addEventListener("change",async e=>{
+  const file = e.target.files[0];
+  e.target.value = "";
+  if(!file) return;
+  if(!file.type.startsWith("image/")) return toast("الملف ليس صورة");
+  if(file.size > 10*1024*1024) return toast("حجم الصورة أكبر من 10MB");
 
- if(refreshing || !token || !user)return;
-
- refreshing=true;
-
- try{
-
-  const result=await readJSON("messages.json");
-
-  const messages=Array.isArray(result.data.messages)
-   ? result.data.messages : [];
-
-  renderMessages(messages);
-
-  setStatus("● متصل");
-
- }catch(e){
-
-  console.error(e);
-  setStatus("● خطأ");
-
-  showError(
-   "تعذر تحميل الرسائل: "+e.message
-  );
-
- }finally{
-
-  refreshing=false;
-
- }
-}
-
-function renderMessages(messages){
-
- const oldScroll=
-  messagesBox.scrollHeight-messagesBox.scrollTop-
-  messagesBox.clientHeight;
-
- messagesBox.innerHTML="";
-
- const visible=messages.slice(-300);
-
- if(!visible.length){
-
-  showLoading("لا توجد رسائل بعد. ابدأ المحادثة 👋");
-  return;
-
- }
-
- visible.forEach(m=>{
-
-  const row=document.createElement("div");
-
-  row.className="message"+
-   (m.userId===user.id?" mine":"");
-
-  const avatar=document.createElement("img");
-
-  avatar.className="avatar";
-  avatar.src=m.avatar || "";
-  avatar.alt="";
-
-  avatar.onerror=()=>{
-   avatar.src="https://ui-avatars.com/api/?name=User";
-  };
-
-  const bubble=document.createElement("div");
-  bubble.className="bubble";
-
-  const sender=document.createElement("div");
-  sender.className="sender";
-  sender.textContent=m.name || "مستخدم";
-
-  bubble.appendChild(sender);
-
-  if(m.text){
-
-   const content=document.createElement("div");
-   content.className="content";
-   content.textContent=m.text;
-
-   bubble.appendChild(content);
+  try{
+    selectedImage = await compressImage(file,1280,0.78);
+    $("previewImg").src = selectedImage;
+    $("preview").style.display = "flex";
+  }catch{
+    toast("تعذر تجهيز الصورة");
   }
-
-  if(m.image){
-
-   const img=document.createElement("img");
-
-   img.className="message-image";
-   img.src=m.image;
-   img.loading="lazy";
-
-   img.onclick=()=>{
-    window.open(m.image,"_blank");
-   };
-
-   bubble.appendChild(img);
-  }
-
-  const time=document.createElement("div");
-
-  time.className="time";
-
-  const date=new Date(m.time);
-
-  time.textContent=
-   isNaN(date.getTime())
-    ? ""
-    : date.toLocaleString("ar");
-
-  bubble.appendChild(time);
-
-  row.appendChild(avatar);
-  row.appendChild(bubble);
-
-  messagesBox.appendChild(row);
-
- });
-
- if(oldScroll<100){
-  messagesBox.scrollTop=messagesBox.scrollHeight;
- }
-
-}
-
-/* =================================
-   إضافة رسالة
-================================= */
-
-async function appendMessage(message){
-
- const result=await readJSON("messages.json");
-
- const messages=Array.isArray(result.data.messages)
-  ? result.data.messages : [];
-
- messages.push(message);
-
- await writeJSON(
-  "messages.json",
-  {messages:messages.slice(-500)},
-  result.sha
- );
-}
-
-/* =================================
-   إرسال نص
-================================= */
-
-async function sendMessage(){
-
- const input=document.getElementById("messageInput");
-
- const text=input.value.trim();
-
- if(!text || sending)return;
-
- if(!user)return alert("أدخل بيانات المستخدم أولاً");
-
- sending=true;
-
- document.getElementById("sendButton").disabled=true;
-
- try{
-
-  await appendMessage({
-
-   id:crypto.randomUUID(),
-   userId:user.id,
-   name:user.name,
-   avatar:user.avatar,
-   text:text,
-   image:"",
-   time:new Date().toISOString()
-
-  });
-
-  input.value="";
-
-  await loadMessages();
-
- }catch(e){
-
-  alert("تعذر إرسال الرسالة: "+e.message);
-
- }finally{
-
-  sending=false;
-  document.getElementById("sendButton").disabled=false;
-
- }
-
-}
-
-/* =================================
-   إرسال صورة
-================================= */
-
-async function sendImage(event){
-
- const file=event.target.files[0];
-
- event.target.value="";
-
- if(!file || !user)return;
-
- if(sending)return;
-
- sending=true;
-
- try{
-
-  setStatus("● رفع الصورة...");
-
-  const image=await uploadImage(file);
-
-  await appendMessage({
-
-   id:crypto.randomUUID(),
-   userId:user.id,
-   name:user.name,
-   avatar:user.avatar,
-   text:"",
-   image:image,
-   time:new Date().toISOString()
-
-  });
-
-  await loadMessages();
-
- }catch(e){
-
-  alert("تعذر إرسال الصورة: "+e.message);
-
- }finally{
-
-  sending=false;
-  setStatus("● متصل");
-
- }
-
-}
-
-/* =================================
-   إعدادات
-================================= */
-
-function openSettings(){
-
- document.getElementById("settingsScreen")
- .classList.remove("hidden");
-
- document.getElementById("tokenInput").value=token;
-
-}
-
-function closeSettings(){
-
- document.getElementById("settingsScreen")
- .classList.add("hidden");
-
-}
-
-async function saveToken(){
-
- const value=document.getElementById("tokenInput")
- .value.trim();
-
- if(!value)return alert("أدخل التوكن");
-
- token=value;
-
- localStorage.setItem("ma_token",token);
-
- closeSettings();
-
- await initialize();
-
-}
-
-function changeProfile(){
-
- closeSettings();
-
- document.getElementById("userName").value=
-  user?.name || "";
-
- document.getElementById("profileScreen")
- .classList.remove("hidden");
-
-}
-
-/* =================================
-   تشغيل المحادثة
-================================= */
-
-function startChat(){
-
- document.getElementById("profileScreen")
- .classList.add("hidden");
-
- loadMessages();
-
- if(timer)clearInterval(timer);
-
- timer=setInterval(()=>{
-
-  if(!document.hidden){
-   loadMessages();
-  }
-
- },5000);
-
-}
-
-async function initialize(){
-
- if(!token){
-
-  openSettings();
-  showLoading("أدخل GitHub Token للاتصال");
-  return;
-
- }
-
- showLoading("جاري الاتصال بالمستودع...");
-
- try{
-
-  // اختبار وجود الملفين وصحة JSON
-  await readJSON("messages.json");
-  await readJSON("users.json");
-
-  if(!user){
-
-   document.getElementById("profileScreen")
-    .classList.remove("hidden");
-
-  }else{
-
-   startChat();
-
-  }
-
- }catch(e){
-
-  showError("خطأ في الاتصال: "+e.message);
-
-  console.error(e);
-
- }
-
-}
-
-/* =================================
-   أحداث لوحة المفاتيح
-================================= */
-
-document.getElementById("messageInput")
-.addEventListener("keydown",e=>{
-
- if(e.key==="Enter"){
-  e.preventDefault();
-  sendMessage();
- }
-
 });
 
-/* تشغيل */
+function removeImage(){
+  selectedImage = null;
+  $("preview").style.display = "none";
+}
 
-initialize();
+/* الاتصال بالخادم */
 
+function apiReady(){
+  return API_BASE.startsWith("https://") &&
+         !API_BASE.includes("YOUR-WORKER-URL");
+}
+
+async function api(path,options={}){
+  if(!apiReady()) throw new Error("لم يتم إعداد رابط الخادم");
+
+  const response = await fetch(API_BASE.replace(/\/$/,"")+path,{
+    ...options,
+    headers:{
+      ...(options.body instanceof FormData ? {} : {"Content-Type":"application/json"}),
+      ...options.headers
+    }
+  });
+
+  const data = await response.json().catch(()=>({}));
+  if(!response.ok){
+    throw new Error(data.error || "Server error: "+response.status);
+  }
+  return data;
+}
+
+/* تخزين وعرض الرسائل */
+
+function saveCache(){
+  try{
+    const list = [...messagesMap.values()].slice(-100);
+    localStorage.setItem(CACHE_KEY,JSON.stringify(list));
+  }catch(e){
+    console.warn("Cache error",e);
+  }
+}
+
+function loadCache(){
+  try{
+    const list = JSON.parse(localStorage.getItem(CACHE_KEY)||"[]");
+    list.forEach(addMessage);
+  }catch(e){
+    console.warn("Cache read error",e);
+  }
+}
+
+function addMessage(msg){
+  if(!msg || !msg.id) return;
+  if(messagesMap.has(msg.id)) return;
+
+  messagesMap.set(msg.id,msg);
+  renderMessage(msg);
+  $("empty").style.display = "none";
+
+  if(msg.createdAt && (!lastMessageId || String(msg.createdAt)>lastMessageId)){
+    lastMessageId = String(msg.createdAt);
+  }
+}
+
+function renderMessage(msg){
+  const isMine = msg.uid === profile?.uid;
+  const row = document.createElement("div");
+  row.className = "message"+(isMine?" mine":"");
+  row.dataset.id = msg.id;
+
+  const avatar = document.createElement("img");
+  avatar.className = "avatar";
+  avatar.src = msg.avatar || "https://placehold.co/100x100/263650/ffffff?text=M";
+  avatar.onerror = ()=>avatar.src="https://placehold.co/100x100/263650/ffffff?text=M";
+
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+
+  const sender = document.createElement("div");
+  sender.className = "sender";
+  sender.textContent = isMine ? "أنت" : (msg.name || "عضو");
+  bubble.appendChild(sender);
+
+  if(msg.text){
+    const text = document.createElement("div");
+    text.className = "message-text";
+    text.textContent = msg.text;
+    bubble.appendChild(text);
+  }
+
+  if(msg.imageUrl){
+    const img = document.createElement("img");
+    img.className = "msg-image";
+    img.src = msg.imageUrl;
+    img.loading = "lazy";
+    img.onclick = ()=>window.open(msg.imageUrl,"_blank");
+    bubble.appendChild(img);
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  meta.textContent = timeText(msg.createdAt) + (msg.pending ? " · جارٍ الإرسال" : "");
+  bubble.appendChild(meta);
+
+  row.append(avatar,bubble);
+  $("messages").appendChild(row);
+}
+
+/* تحديث الرسائل الجديدة فقط */
+
+async function loadMessages(){
+  if(polling || !apiReady()) return;
+  polling = true;
+
+  try{
+    const data = await api(
+      "/messages?after="+encodeURIComponent(lastMessageId)+"&limit=30"
+    );
+
+    const messages = Array.isArray(data.messages) ? data.messages : [];
+
+    messages.sort((a,b)=>
+      new Date(a.createdAt)-new Date(b.createdAt)
+    );
+
+    messages.forEach(msg=>{
+      addMessage(msg);
+    });
+
+    saveCache();
+    setConnection("متصل");
+  }catch(e){
+    console.error(e);
+    setConnection("تعذر الاتصال");
+  }finally{
+    polling = false;
+  }
+}
+
+/* إرسال الرسائل مع العرض الفوري */
+
+async function sendMessage(){
+  if(loading) return;
+
+  const text = $("messageInput").value.trim();
+  if(!text && !selectedImage) return;
+
+  if(!profile){
+    openProfile();
+    return;
+  }
+
+  if(!apiReady()){
+    toast("يجب إعداد رابط الخادم أولاً");
+    return;
+  }
+
+  loading = true;
+  $("sendBtn").disabled = true;
+
+  const localId = makeId();
+  const imageData = selectedImage;
+  const message = {
+    id:localId,
+    uid:profile.uid,
+    name:profile.name,
+    avatar:profile.avatar,
+    text,
+    imageUrl:"",
+    createdAt:new Date().toISOString(),
+    pending:true
+  };
+
+  // إظهار الرسالة فوراً
+  addMessage(message);
+  saveCache();
+  scrollBottom();
+
+  $("messageInput").value = "";
+  $("messageInput").style.height = "auto";
+  removeImage();
+
+  try{
+    let imageUrl = "";
+
+    // رفع الصورة عند وجودها
+    if(imageData){
+      const blob = await (await fetch(imageData)).blob();
+      const form = new FormData();
+      form.append("image",blob,"image.jpg");
+      form.append("uid",profile.uid);
+
+      const upload = await api("/upload",{
+        method:"POST",
+        body:form
+      });
+
+      imageUrl = upload.url;
+    }
+
+    const result = await api("/messages",{
+      method:"POST",
+      body:JSON.stringify({
+        id:localId,
+        uid:profile.uid,
+        name:profile.name,
+        avatar:profile.avatar,
+        text,
+        imageUrl
+      })
+    });
+
+    const saved = result.message || {
+      ...message,
+      imageUrl,
+      pending:false
+    };
+
+    messagesMap.delete(localId);
+
+    const old = document.querySelector(
+      '[data-id="'+CSS.escape(localId)+'"]'
+    );
+    if(old) old.remove();
+
+    addMessage({...saved,pending:false});
+    saveCache();
+    scrollBottom();
+
+  }catch(e){
+    console.error(e);
+    toast("تعذر الإرسال. تحقق من اتصالك");
+    // تبقى الرسالة ظاهرة في الواجهة مع علامة الانتظار
+  }finally{
+    loading = false;
+    $("sendBtn").disabled = false;
+  }
+}
+
+function scrollBottom(){
+  const box = $("messages");
+  requestAnimationFrame(()=>{
+    box.scrollTop = box.scrollHeight;
+  });
+}
+
+/* الكتابة والإرسال */
+
+$("messageInput").addEventListener("input",function(){
+  this.style.height = "auto";
+  this.style.height = Math.min(this.scrollHeight,120)+"px";
+});
+
+$("messageInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+/* التشغيل */
+
+async function start(){
+  loadCache();
+
+  if(!profile){
+    openProfile();
+  }else{
+    $("setup").style.display = "none";
+  }
+
+  if(!apiReady()){
+    setConnection("بانتظار إعداد الخادم");
+    return;
+  }
+
+  await registerProfile();
+  await loadMessages();
+
+  setInterval(loadMessages,POLL_INTERVAL);
+}
+
+start();
 </script>
-
 </body>
 </html>
