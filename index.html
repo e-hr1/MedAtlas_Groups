@@ -15,90 +15,88 @@
 }
 *{box-sizing:border-box}
 body{
-margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;
-background:var(--bg);color:var(--text);height:100dvh;overflow:hidden
+margin:0;font-family:system-ui,Tahoma,Arial;
+background:var(--bg);color:var(--text);
+height:100dvh;overflow:hidden
 }
 button,input,textarea{font:inherit}
 button{cursor:pointer}
 .app{
-height:100dvh;max-width:850px;margin:auto;display:flex;
-flex-direction:column;background:var(--bg);position:relative
+height:100dvh;max-width:850px;margin:auto;
+display:flex;flex-direction:column;background:var(--bg)
 }
 header{
 height:68px;flex-shrink:0;display:flex;align-items:center;
 gap:12px;padding:0 16px;background:var(--panel);
-border-bottom:1px solid var(--border);z-index:2
+border-bottom:1px solid var(--border)
 }
 .logo{
-width:43px;height:43px;border-radius:14px;display:grid;
-place-items:center;background:linear-gradient(135deg,#688cff,#4256bd);
+width:43px;height:43px;border-radius:14px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,#688cff,#4256bd);
 font-size:22px
 }
 .head-info{flex:1;min-width:0}
 .head-info strong{display:block;font-size:15px}
 .head-info small{color:var(--muted);font-size:12px}
 .status-dot{
-display:inline-block;width:7px;height:7px;border-radius:50%;
-background:#37d99b;margin-left:5px
+display:inline-block;width:7px;height:7px;
+border-radius:50%;background:#37d99b;margin-left:5px
 }
-.icon-btn{
-width:40px;height:40px;border:0;border-radius:13px;
-color:var(--text);background:var(--panel2);font-size:19px
+.icon-btn,.attach{
+width:42px;height:42px;border:0;border-radius:13px;
+color:var(--text);background:var(--panel2);font-size:20px
 }
 .messages{
 flex:1;overflow-y:auto;padding:18px 13px 25px;
 scroll-behavior:smooth;overscroll-behavior:contain
 }
-.messages::-webkit-scrollbar{width:4px}
-.messages::-webkit-scrollbar-thumb{background:#34445d;border-radius:10px}
 .message{
-display:flex;gap:8px;margin:12px 0;align-items:flex-end;
-animation:appear .18s ease
+display:flex;gap:8px;margin:12px 0;align-items:flex-end
 }
 .message.mine{flex-direction:row-reverse}
-@keyframes appear{
-from{opacity:0;transform:translateY(7px)}
-to{opacity:1;transform:translateY(0)}
-}
 .avatar{
-width:34px;height:34px;border-radius:50%;object-fit:cover;
-background:var(--panel2);flex-shrink:0
+width:34px;height:34px;border-radius:50%;
+object-fit:cover;background:var(--panel2);flex-shrink:0
 }
 .bubble{
 max-width:min(78%,520px);padding:10px 12px 7px;
 border-radius:17px;background:var(--other);overflow-wrap:anywhere
 }
-.mine .bubble{background:var(--mine);border-bottom-right-radius:5px}
+.mine .bubble{
+background:var(--mine);border-bottom-right-radius:5px
+}
 .message:not(.mine) .bubble{border-bottom-left-radius:5px}
 .sender{
 font-size:11px;font-weight:700;color:#a9bcff;margin-bottom:5px
 }
-.message-text{white-space:pre-wrap;line-height:1.65;font-size:14px}
+.message-text{
+white-space:pre-wrap;line-height:1.65;font-size:14px
+}
 .msg-image{
-max-width:100%;max-height:260px;display:block;border-radius:11px;
-margin-top:5px;object-fit:cover;cursor:pointer
+max-width:100%;max-height:260px;display:block;
+border-radius:11px;margin-top:5px;object-fit:cover;cursor:pointer
 }
 .meta{
-display:flex;justify-content:flex-end;gap:5px;margin-top:5px;
+display:flex;justify-content:flex-end;margin-top:5px;
 color:#c1cce0;font-size:10px;opacity:.8
 }
 .composer-wrap{
 padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-background:var(--panel);border-top:1px solid var(--border);flex-shrink:0
+background:var(--panel);border-top:1px solid var(--border);
+flex-shrink:0
 }
 .preview{
 display:none;padding:5px 0 10px;align-items:center;gap:10px
 }
-.preview img{width:55px;height:55px;border-radius:10px;object-fit:cover}
+.preview img{
+width:55px;height:55px;border-radius:10px;object-fit:cover
+}
 .preview button{
-border:0;background:#263650;color:white;width:30px;height:30px;
-border-radius:50%
+border:0;background:#263650;color:white;
+width:30px;height:30px;border-radius:50%
 }
 .composer{display:flex;align-items:flex-end;gap:8px}
-.attach{
-width:43px;height:43px;flex-shrink:0;border:0;border-radius:14px;
-background:var(--panel2);color:var(--text);font-size:21px
-}
 #messageInput{
 flex:1;min-width:0;max-height:120px;resize:none;
 border:1px solid var(--border);border-radius:15px;
@@ -111,7 +109,9 @@ width:44px;height:44px;border:0;border-radius:14px;
 background:var(--accent);color:white;font-size:19px;flex-shrink:0
 }
 .send:disabled{opacity:.5}
-.notice{text-align:center;color:var(--muted);font-size:11px;padding:7px 0 0}
+.notice{
+text-align:center;color:var(--muted);font-size:11px;padding:7px 0 0
+}
 .empty{text-align:center;color:var(--muted);margin-top:90px}
 .empty div{font-size:42px;margin-bottom:12px}
 #setup{
@@ -119,8 +119,9 @@ position:fixed;inset:0;z-index:10;display:none;
 align-items:center;justify-content:center;background:#080f1c;padding:20px
 }
 .setup-card{
-width:100%;max-width:370px;background:var(--panel);padding:25px;
-border-radius:24px;border:1px solid var(--border);text-align:center
+width:100%;max-width:370px;background:var(--panel);
+padding:25px;border-radius:24px;border:1px solid var(--border);
+text-align:center
 }
 .setup-card h2{margin:0 0 8px}
 .setup-card p{color:var(--muted);font-size:13px}
@@ -138,10 +139,11 @@ width:100%;padding:13px;border:0;border-radius:12px;
 background:var(--accent);color:white;margin-top:10px
 }
 #toast{
-position:fixed;bottom:105px;left:50%;transform:translateX(-50%);
-background:#243650;color:white;padding:10px 16px;border-radius:20px;
-font-size:12px;opacity:0;pointer-events:none;transition:.2s;
-z-index:20;white-space:nowrap;max-width:90%;overflow:hidden
+position:fixed;bottom:105px;left:50%;
+transform:translateX(-50%);background:#243650;color:white;
+padding:10px 16px;border-radius:20px;font-size:12px;
+opacity:0;pointer-events:none;transition:.2s;z-index:20;
+max-width:92%;white-space:normal;text-align:center
 }
 #toast.show{opacity:1}
 #imageInput{display:none}
@@ -153,15 +155,15 @@ body{background:#070d17}
 </head>
 
 <body>
-
 <div class="app">
+
 <header>
 <div class="logo">🩺</div>
 <div class="head-info">
 <strong>MedAtlas Groups</strong>
 <small><span class="status-dot"></span><span id="connection">جاري الاتصال...</span></small>
 </div>
-<button class="icon-btn" onclick="openProfile()" title="الملف الشخصي">👤</button>
+<button class="icon-btn" onclick="openProfile()">👤</button>
 </header>
 
 <main class="messages" id="messages">
@@ -178,6 +180,7 @@ body{background:#070d17}
 <span style="flex:1;color:var(--muted);font-size:12px">الصورة جاهزة للإرسال</span>
 <button onclick="removeImage()">×</button>
 </div>
+
 <div class="composer">
 <button class="attach" onclick="document.getElementById('imageInput').click()">＋</button>
 <input id="imageInput" type="file" accept="image/*">
@@ -204,45 +207,51 @@ src="https://placehold.co/100x100/263650/ffffff?text=M">
 <div id="toast"></div>
 
 <script>
-/* ==========================================
-   MedAtlas Groups - GitHub Configuration
-========================================== */
-
-// ضع توكن GitHub الخاص بك بين علامتي التنصيص.
-// تنبيه: لا ترفع هذا الملف إلى موقع عام بعد وضع التوكن.
+/* ==================================
+   إعدادات GitHub
+================================== */
 
 const GITHUB_TOKEN = "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";
-
-const GITHUB_OWNER = "e-hr1";
-const GITHUB_REPO = "MedAtlas_Groups";
-const GITHUB_BRANCH = "main";
-
-const POLL_INTERVAL = 5000;
+const OWNER = "e-hr1";
+const REPO = "MedAtlas_Groups";
+const BRANCH = "main";
 
 const MESSAGES_FILE = "messages.json";
 const USERS_FILE = "users.json";
 
-const CACHE_KEY = "medatlas_group_messages_v1";
-const PROFILE_KEY = "medatlas_group_profile_v1";
+const POLL_INTERVAL = 5000;
+const CACHE_KEY = "medatlas_group_messages_v2";
+const PROFILE_KEY = "medatlas_group_profile_v2";
 
-let profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || "null");
+let profile = null;
 let selectedImage = null;
+let messagesMap = new Map();
 let polling = false;
 let sending = false;
-let messagesMap = new Map();
+let pollTimer = null;
 
 const $ = id => document.getElementById(id);
+
+try{
+profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || "null");
+}catch{
+profile = null;
+}
+
+/* ==================================
+   أدوات عامة
+================================== */
 
 function toast(message){
 const el = $("toast");
 el.textContent = message;
 el.classList.add("show");
 clearTimeout(toast.timer);
-toast.timer = setTimeout(()=>el.classList.remove("show"),2500);
+toast.timer = setTimeout(()=>el.classList.remove("show"),4000);
 }
 
-function setConnection(text){
-$("connection").textContent = text;
+function setConnection(value){
+$("connection").textContent = value;
 }
 
 function makeId(){
@@ -252,71 +261,94 @@ return crypto.randomUUID
 }
 
 function timeText(value){
-const d = value ? new Date(value) : new Date();
-if(isNaN(d.getTime())) return "";
-return d.toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"});
+const d = new Date(value || Date.now());
+return isNaN(d.getTime()) ? "" :
+d.toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"});
 }
 
-function apiHeaders(){
+function configReady(){
+return GITHUB_TOKEN &&
+GITHUB_TOKEN !== "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";
+}
+
+function apiUrl(path){
+return "https://api.github.com/repos/"
++OWNER+"/"+REPO+"/contents/"+path;
+}
+
+function headers(){
 return {
-"Authorization":"Bearer "+GITHUB_TOKEN,
+"Authorization":"token "+GITHUB_TOKEN,
 "Accept":"application/vnd.github+json",
 "X-GitHub-Api-Version":"2022-11-28"
 };
 }
 
-function apiUrl(path){
-return "https://api.github.com/repos/"
-+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"
-+path;
+async function readResponse(response){
+const text = await response.text();
+let data = {};
+
+try{
+data = text ? JSON.parse(text) : {};
+}catch{
+throw new Error("استجابة GitHub غير مفهومة: "+text.slice(0,150));
 }
 
-function checkConfig(){
-return GITHUB_TOKEN &&
-GITHUB_TOKEN !== "PASTE_YOUR_GITHUB_TOKEN_HERE";
+if(!response.ok){
+let message = data.message || "GitHub API error";
+
+if(response.status === 401) message = "التوكن غير صحيح أو منتهي الصلاحية";
+if(response.status === 403) message = "ليس لديك صلاحية أو تجاوزت حد الطلبات";
+if(response.status === 404) message = "المستودع أو الملف غير موجود";
+if(response.status === 409) message = "تعارض أثناء تحديث الملف";
+if(response.status === 422) message = "رفض GitHub عملية الحفظ: "+message;
+
+throw new Error(message+" (HTTP "+response.status+")");
 }
 
-/* تحويل Base64 إلى نص UTF-8 */
+return data;
+}
 
-function decodeBase64(base64){
-const clean = base64.replace(/\s/g,"");
-const binary = atob(clean);
+/* ==================================
+   Base64 UTF-8
+================================== */
+
+function decodeBase64(value){
+const binary = atob(value.replace(/\s/g,""));
 const bytes = Uint8Array.from(binary,c=>c.charCodeAt(0));
-return new TextDecoder("utf-8").decode(bytes);
+return new TextDecoder().decode(bytes);
 }
 
-function encodeBase64(text){
-const bytes = new TextEncoder().encode(text);
+function encodeBase64(value){
+const bytes = new TextEncoder().encode(value);
 let binary = "";
-const chunk = 0x8000;
-
-for(let i=0;i<bytes.length;i+=chunk){
-binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
+for(let i=0;i<bytes.length;i+=8192){
+binary += String.fromCharCode(...bytes.subarray(i,i+8192));
 }
-
 return btoa(binary);
 }
 
-/* قراءة ملف JSON من GitHub */
+/* ==================================
+   قراءة ملف GitHub
+================================== */
 
-async function readGitHubFile(path){
-const response = await fetch(
-apiUrl(path)+"?ref="+encodeURIComponent(GITHUB_BRANCH),
-{headers:apiHeaders(),cache:"no-store"}
-);
+async function getFile(path){
+const url = apiUrl(path)+"?ref="+encodeURIComponent(BRANCH);
+
+const response = await fetch(url,{
+method:"GET",
+headers:headers(),
+cache:"no-store"
+});
 
 if(response.status === 404){
 return {data:null,sha:null};
 }
 
-const result = await response.json();
-
-if(!response.ok){
-throw new Error(result.message || "GitHub read error");
-}
+const result = await readResponse(response);
 
 if(!result.content){
-throw new Error("ملف GitHub فارغ أو غير قابل للقراءة");
+throw new Error("لم يتم العثور على محتوى الملف "+path);
 }
 
 const content = decodeBase64(result.content);
@@ -327,59 +359,78 @@ sha:result.sha
 };
 }
 
-/* كتابة ملف JSON مع إعادة المحاولة عند التعارض */
+/* ==================================
+   حفظ ملف GitHub
+================================== */
 
-async function updateGitHubJson(path,updateFunction){
-for(let attempt=0;attempt<4;attempt++){
-
-const current = await readGitHubFile(path);
-
-const data = current.data || (
-path === MESSAGES_FILE
-? {messages:[]}
-: {users:[]}
-);
-
-const updated = updateFunction(data);
-
+async function putFile(path,content,sha,message){
 const body = {
-message:"Update "+path,
-content:encodeBase64(JSON.stringify(updated,null,2)),
-branch:GITHUB_BRANCH
+message:message,
+content:encodeBase64(JSON.stringify(content,null,2)),
+branch:BRANCH
 };
 
-if(current.sha){
-body.sha = current.sha;
-}
+if(sha) body.sha = sha;
 
 const response = await fetch(apiUrl(path),{
 method:"PUT",
 headers:{
-...apiHeaders(),
+...headers(),
 "Content-Type":"application/json"
 },
 body:JSON.stringify(body)
 });
 
-if(response.ok){
-return updated;
+return await readResponse(response);
 }
 
-const error = await response.json().catch(()=>({}));
+/* تحديث JSON مع إعادة المحاولة */
 
-if(response.status === 409 ||
-response.status === 422){
-await new Promise(resolve=>setTimeout(resolve,500));
+async function updateFile(path,modify){
+for(let attempt=0;attempt<5;attempt++){
+
+const current = await getFile(path);
+
+let data = current.data;
+
+if(!data){
+data = path === MESSAGES_FILE
+? {messages:[]}
+: {users:[]};
+}
+
+const updated = modify(data);
+
+try{
+await putFile(
+path,
+updated,
+current.sha,
+"Update "+path
+);
+
+return updated;
+
+}catch(error){
+
+if(
+error.message.includes("HTTP 409") ||
+error.message.includes("HTTP 422")
+){
+await new Promise(resolve=>setTimeout(resolve,700));
 continue;
 }
 
-throw new Error(error.message || "GitHub write error");
+throw error;
+}
 }
 
-throw new Error("حدث تعارض أثناء الحفظ. حاول مرة أخرى");
+throw new Error("تعذر حفظ الملف بعد عدة محاولات");
 }
 
-/* ضغط الصور */
+/* ==================================
+   ضغط الصور
+================================== */
 
 function compressImage(file,maxSize,quality){
 return new Promise((resolve,reject)=>{
@@ -404,56 +455,59 @@ img,0,0,canvas.width,canvas.height
 resolve(canvas.toDataURL("image/jpeg",quality));
 };
 
-img.onerror = reject;
+img.onerror = ()=>reject(new Error("تعذر فتح الصورة"));
 img.src = reader.result;
 };
 
-reader.onerror = reject;
+reader.onerror = ()=>reject(new Error("تعذر قراءة الصورة"));
 reader.readAsDataURL(file);
 });
 }
 
-/* رفع صورة إلى مجلد uploads/images */
+/* ==================================
+   رفع الصور إلى GitHub
+================================== */
 
 async function uploadImage(dataUrl){
+
 const base64 = dataUrl.split(",")[1];
 
-if(!base64) throw new Error("الصورة غير صالحة");
+if(!base64){
+throw new Error("بيانات الصورة غير صحيحة");
+}
 
-const fileName = "uploads/images/"+makeId()+".jpg";
+const path = "uploads/images/"+makeId()+".jpg";
 
-const response = await fetch(apiUrl(fileName),{
+const response = await fetch(apiUrl(path),{
 method:"PUT",
 headers:{
-...apiHeaders(),
+...headers(),
 "Content-Type":"application/json"
 },
 body:JSON.stringify({
-message:"Upload chat image",
+message:"Upload MedAtlas Groups image",
 content:base64,
-branch:GITHUB_BRANCH
+branch:BRANCH
 })
 });
 
-const result = await response.json();
+const result = await readResponse(response);
 
-if(!response.ok){
-throw new Error(result.message || "Image upload failed");
+if(!result.content || !result.content.download_url){
+throw new Error("تم رفع الصورة لكن تعذر الحصول على رابطها");
 }
 
-return "https://raw.githubusercontent.com/"
-+GITHUB_OWNER+"/"+GITHUB_REPO+"/"
-+GITHUB_BRANCH+"/"+fileName;
+return result.content.download_url;
 }
 
-/* الملف الشخصي */
+/* ==================================
+   الملف الشخصي
+================================== */
 
 function openProfile(){
 $("nameInput").value = profile?.name || "";
-$("profilePreview").src =
-profile?.avatar ||
+$("profilePreview").src = profile?.avatar ||
 "https://placehold.co/100x100/263650/ffffff?text=M";
-
 $("setup").style.display = "flex";
 }
 
@@ -461,29 +515,24 @@ $("avatarInput").addEventListener("change",async e=>{
 const file = e.target.files[0];
 if(!file) return;
 
-if(!file.type.startsWith("image/")){
-return toast("اختر صورة صحيحة");
-}
-
 try{
-const data = await compressImage(file,300,0.7);
-selectedImage = data;
-$("profilePreview").src = data;
-}catch{
-toast("تعذر قراءة الصورة");
+selectedImage = await compressImage(file,300,0.7);
+$("profilePreview").src = selectedImage;
+}catch(error){
+toast(error.message);
 }
 });
 
 async function saveProfile(){
+
 const name = $("nameInput").value.trim();
 
 if(!name) return toast("اكتب اسمك أولاً");
-
-if(!checkConfig()) return toast("أضف توكن GitHub أولاً");
+if(!configReady()) return toast("التوكن غير مضبوط");
 
 profile = {
 uid:profile?.uid || makeId(),
-name,
+name:name,
 avatar:selectedImage || profile?.avatar || ""
 };
 
@@ -492,19 +541,21 @@ localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
 $("setup").style.display = "none";
 selectedImage = null;
 
-toast("تم حفظ ملفك الشخصي");
-
 try{
 await registerProfile();
-}catch(e){
-console.error(e);
-toast("تم الحفظ محلياً وتعذر رفع الملف الشخصي");
+toast("تم تسجيل ملفك الشخصي");
+}catch(error){
+toast("تعذر تسجيل الملف: "+error.message);
 }
 }
 
 async function registerProfile(){
-await updateGitHubJson(USERS_FILE,data=>{
-if(!Array.isArray(data.users)) data.users = [];
+
+await updateFile(USERS_FILE,data=>{
+
+if(!Array.isArray(data.users)){
+data.users = [];
+}
 
 const index = data.users.findIndex(
 u=>u.uid === profile.uid
@@ -526,16 +577,19 @@ return data;
 });
 }
 
-/* اختيار الصور */
+/* ==================================
+   اختيار صورة الرسالة
+================================== */
 
 $("imageInput").addEventListener("change",async e=>{
+
 const file = e.target.files[0];
 e.target.value = "";
 
 if(!file) return;
 
 if(!file.type.startsWith("image/")){
-return toast("الملف ليس صورة");
+return toast("اختر ملف صورة");
 }
 
 if(file.size > 10*1024*1024){
@@ -543,11 +597,11 @@ return toast("حجم الصورة أكبر من 10MB");
 }
 
 try{
-selectedImage = await compressImage(file,1280,0.78);
+selectedImage = await compressImage(file,1000,0.65);
 $("previewImg").src = selectedImage;
 $("preview").style.display = "flex";
-}catch{
-toast("تعذر تجهيز الصورة");
+}catch(error){
+toast(error.message);
 }
 });
 
@@ -556,9 +610,12 @@ selectedImage = null;
 $("preview").style.display = "none";
 }
 
-/* عرض الرسائل */
+/* ==================================
+   عرض الرسائل
+================================== */
 
 function addMessage(msg){
+
 if(!msg || !msg.id || messagesMap.has(msg.id)) return;
 
 messagesMap.set(msg.id,msg);
@@ -568,10 +625,11 @@ $("empty").style.display = "none";
 }
 
 function renderMessage(msg){
-const isMine = msg.uid === profile?.uid;
+
+const mine = msg.uid === profile?.uid;
 
 const row = document.createElement("div");
-row.className = "message"+(isMine?" mine":"");
+row.className = "message"+(mine?" mine":"");
 row.dataset.id = msg.id;
 
 const avatar = document.createElement("img");
@@ -588,7 +646,7 @@ bubble.className = "bubble";
 
 const sender = document.createElement("div");
 sender.className = "sender";
-sender.textContent = isMine ? "أنت" : (msg.name || "عضو");
+sender.textContent = mine ? "أنت" : (msg.name || "عضو");
 bubble.appendChild(sender);
 
 if(msg.text){
@@ -609,43 +667,47 @@ bubble.appendChild(img);
 
 const meta = document.createElement("div");
 meta.className = "meta";
-meta.textContent = timeText(msg.createdAt);
-bubble.appendChild(meta);
+meta.textContent = timeText(msg.createdAt)+
+(msg.pending ? " · جارٍ الإرسال" : "");
 
+bubble.appendChild(meta);
 row.append(avatar,bubble);
 $("messages").appendChild(row);
 }
 
 function saveCache(){
 try{
-const list = [...messagesMap.values()].slice(-100);
-localStorage.setItem(CACHE_KEY,JSON.stringify(list));
-}catch(e){
-console.warn(e);
+localStorage.setItem(
+CACHE_KEY,
+JSON.stringify([...messagesMap.values()].slice(-100))
+);
+}catch(error){
+console.warn(error);
 }
 }
 
 function loadCache(){
 try{
-const list = JSON.parse(
-localStorage.getItem(CACHE_KEY) || "[]"
-);
-
+const list = JSON.parse(localStorage.getItem(CACHE_KEY)||"[]");
 list.forEach(addMessage);
-}catch(e){
-console.warn("Cache error",e);
+}catch(error){
+console.warn(error);
 }
 }
 
-/* جلب الرسائل */
+/* ==================================
+   تحميل الرسائل
+================================== */
 
 async function loadMessages(){
-if(polling || !checkConfig()) return;
+
+if(polling || !configReady()) return;
 
 polling = true;
 
 try{
-const result = await readGitHubFile(MESSAGES_FILE);
+
+const result = await getFile(MESSAGES_FILE);
 
 const list = Array.isArray(result.data?.messages)
 ? result.data.messages
@@ -660,17 +722,22 @@ list.forEach(addMessage);
 saveCache();
 setConnection("متصل");
 
-}catch(e){
-console.error(e);
-setConnection("تعذر الاتصال");
-}finally{
+}catch(error){
+console.error("Load messages:",error);
+setConnection("فشل الاتصال");
+}catchEndPlaceholder
+
+finally{
 polling = false;
 }
 }
 
-/* إرسال رسالة */
+/* ==================================
+   إرسال رسالة
+================================== */
 
 async function sendMessage(){
+
 if(sending) return;
 
 const text = $("messageInput").value.trim();
@@ -682,29 +749,29 @@ openProfile();
 return;
 }
 
-if(!checkConfig()){
-toast("أضف توكن GitHub في الكود");
+if(!configReady()){
+toast("أضف التوكن في إعدادات الكود");
 return;
 }
 
 sending = true;
 $("sendBtn").disabled = true;
 
-const localId = makeId();
+const id = makeId();
 const imageData = selectedImage;
 
 const message = {
-id:localId,
+id:id,
 uid:profile.uid,
 name:profile.name,
 avatar:profile.avatar,
-text,
+text:text,
 imageUrl:"",
 createdAt:new Date().toISOString(),
 pending:true
 };
 
-/* عرض الرسالة فوراً */
+/* إظهار الرسالة فوراً */
 
 addMessage(message);
 saveCache();
@@ -715,6 +782,7 @@ $("messageInput").style.height = "auto";
 removeImage();
 
 try{
+
 let imageUrl = "";
 
 if(imageData){
@@ -722,15 +790,18 @@ toast("جارٍ رفع الصورة...");
 imageUrl = await uploadImage(imageData);
 }
 
-await updateGitHubJson(MESSAGES_FILE,data=>{
+toast("جارٍ حفظ الرسالة...");
+
+await updateFile(MESSAGES_FILE,data=>{
+
 if(!Array.isArray(data.messages)){
 data.messages = [];
 }
 
-if(!data.messages.some(m=>m.id === localId)){
+if(!data.messages.some(m=>m.id === id)){
 data.messages.push({
 ...message,
-imageUrl,
+imageUrl:imageUrl,
 pending:false
 });
 }
@@ -738,27 +809,43 @@ pending:false
 return data;
 });
 
+/* تحديث الرسالة المحلية */
+
 const old = document.querySelector(
-'[data-id="'+CSS.escape(localId)+'"]'
+'[data-id="'+CSS.escape(id)+'"]'
 );
 
 if(old) old.remove();
 
-messagesMap.delete(localId);
+messagesMap.delete(id);
 
 addMessage({
 ...message,
-imageUrl,
+imageUrl:imageUrl,
 pending:false
 });
 
 saveCache();
 scrollBottom();
-toast("تم إرسال الرسالة");
 
-}catch(e){
-console.error(e);
-toast("فشل الإرسال: "+e.message);
+toast("تم إرسال الرسالة بنجاح");
+
+}catch(error){
+
+console.error("Send error:",error);
+
+/* حذف الرسالة الفاشلة من العرض */
+const old = document.querySelector(
+'[data-id="'+CSS.escape(id)+'"]'
+);
+
+if(old) old.remove();
+
+messagesMap.delete(id);
+saveCache();
+
+toast("فشل الإرسال: "+error.message);
+
 }finally{
 sending = false;
 $("sendBtn").disabled = false;
@@ -766,14 +853,15 @@ $("sendBtn").disabled = false;
 }
 
 function scrollBottom(){
-const box = $("messages");
-
 requestAnimationFrame(()=>{
+const box = $("messages");
 box.scrollTop = box.scrollHeight;
 });
 }
 
-/* الكتابة والإرسال */
+/* ==================================
+   الكتابة
+================================== */
 
 $("messageInput").addEventListener("input",function(){
 this.style.height = "auto";
@@ -787,16 +875,54 @@ sendMessage();
 }
 });
 
-/* تشغيل التطبيق */
+/* ==================================
+   اختبار الاتصال
+================================== */
+
+async function testConnection(){
+
+try{
+
+const response = await fetch(
+"https://api.github.com/repos/"+OWNER+"/"+REPO,
+{headers:headers(),cache:"no-store"}
+);
+
+await readResponse(response);
+
+setConnection("GitHub متصل");
+
+return true;
+
+}catch(error){
+
+console.error(error);
+setConnection("تعذر الاتصال");
+
+toast(error.message);
+return false;
+}
+}
+
+/* ==================================
+   تشغيل التطبيق
+================================== */
 
 async function start(){
+
 loadCache();
 
-if(!checkConfig()){
+if(!configReady()){
 setConnection("التوكن غير مضاف");
 openProfile();
 return;
 }
+
+setConnection("جاري التحقق من GitHub...");
+
+const connected = await testConnection();
+
+if(!connected) return;
 
 if(!profile){
 openProfile();
@@ -806,11 +932,13 @@ $("setup").style.display = "none";
 
 try{
 await loadMessages();
-setInterval(loadMessages,POLL_INTERVAL);
-}catch(e){
-console.error(e);
-setConnection("تعذر الاتصال");
+}catch(error){
+console.error(error);
 }
+
+if(pollTimer) clearInterval(pollTimer);
+
+pollTimer = setInterval(loadMessages,POLL_INTERVAL);
 }
 
 start();
