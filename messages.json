@@ -1,3 +1,13 @@
 {
-  "messages": []
+  "messages": [
+    {
+      "id": "cfabe422-56f5-4803-a62d-67660f540fd0",
+      "userId": "40e61755-646a-4d17-8d5f-9d26f243e8da",
+      "name": "م",
+      "avatar": "https://raw.githubusercontent.com/e-hr1/MedAtlas_Groups/main/uploads/images/d69072e3-2337-4a6a-9423-725f69e7b741.jpg",
+      "text": "مرحبا",
+      "image": "",
+      "time": "2026-11-20T15:15:11.852Z"
+    }
+  ]
 }
